@@ -21,6 +21,7 @@ public class Main {
     ExecutionController.performPhysicsStepsInBackground();
     
     // TODO Start the odometer thread (1 line)
+    odometer.run();
     
     SquareDriver.driveInASquare(SQUARE_LENGTH);
     System.exit(0);
