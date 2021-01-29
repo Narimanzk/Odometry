@@ -15,7 +15,7 @@ WorldInfo {
 }
 Viewpoint {
   orientation 0.9486789497182655 0.004743434277258464 0.31620523429049363 0.03162265801408908
-  position 0.25825660969537606 0.12786479308018245 1.3213988840760207
+  position 0.815853299346432 0.5221493206224564 2.5712987863457863
 }
 DPM-Floor {
   dimension 7 7
@@ -34,4 +34,47 @@ DPM-Floor {
 TexturedBackground {
 }
 TexturedBackgroundLight {
+}
+DPM-Robot {
+  translation 0.16 0.15 0.1
+  rotation 0 0 -1 -5.307179586466759e-06
+  children [
+    BallCaster {
+      translation 0 -0.04 -0.05
+    }
+    EV3-LargeMotor {
+      translation -0.064 0.0618 0.022
+      rotation 0 1 0 -1.5707953071795862
+      children [
+        EV3-Ultrasonic {
+          name "S1"
+          translation 0.028 0.012 -0.0081
+          rotation 0.707108281185553 3.3905113482557537e-09 0.70710528118436 3.14159
+        }
+      ]
+    }
+    EV3-LargeMotor {
+      name "D"
+      translation 0.056 0.022 -0.026
+      children [
+        Wheel {
+          translation 0.0215 -0.001 0
+          rotation 0 0 1 1.5708
+        }
+      ]
+    }
+    EV3-LargeMotor {
+      name "A"
+      translation -0.056 0.022 -0.026
+      rotation 0 0 1 -5.307179586466759e-06
+      children [
+        Wheel {
+          translation -0.0217 -0.001 0
+          rotation 0 0 -1 1.5708
+        }
+      ]
+    }
+    EV3 {
+    }
+  ]
 }
