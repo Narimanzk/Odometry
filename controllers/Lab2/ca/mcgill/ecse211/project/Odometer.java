@@ -85,7 +85,6 @@ public class Odometer implements Runnable {
    * This method is where the logic for the odometer will run.
    */
   @Override public void run() {
-    // TODO Complete the following tasks
     // Reset motor tacho counts to zero
     leftMotor.resetTachoCount();
     rightMotor.resetTachoCount();
@@ -99,7 +98,7 @@ public class Odometer implements Runnable {
       currTacho[LEFT] = leftMotor.getTachoCount();
       currTacho[RIGHT] = rightMotor.getTachoCount();
 
-      // TODO Implement this method below so it updates the deltaPosition
+      //updating the deltaPosition
       updateDeltaPosition(prevTacho, currTacho, theta, deltaPosition);
 
       // Update odometer values by completing and calling the relevant method
@@ -124,11 +123,16 @@ public class Odometer implements Runnable {
     double dy = 0;
     double dtheta = 0;
     
-    // TODO Calculate changes in x, y, theta based on current and previous tachometer counts:
+    //Calculate changes in x, y, theta based on current and previous tachometer counts:
     // Compute left and right wheel displacements
+    double leftdisp = 3.14159 * WHEEL_RAD * (curr[LEFT]-prev[LEFT])/180;
+    double rightdisp = 3.14159 * WHEEL_RAD * (curr[RIGHT]-prev[RIGHT])/180;
+    double thetadisp = 0.5 * (leftdisp + rightdisp);
     // Compute change in heading and x and y components of displacement
-
-    // Set deltas like this
+    dtheta = ((leftdisp - rightdisp)/BASE_WIDTH) * (180 / Math.PI);
+    dx = thetadisp * Math.sin(theta);
+    dy = thetadisp * Math.cos(theta);
+    // Set deltas
     deltas[0] = dx;
     deltas[1] = dy;
     deltas[2] = Math.toDegrees(dtheta);
