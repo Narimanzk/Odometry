@@ -87,18 +87,25 @@ public class Odometer implements Runnable {
   @Override public void run() {
     // TODO Complete the following tasks
     // Reset motor tacho counts to zero
+    leftMotor.resetTachoCount();
+    rightMotor.resetTachoCount();
+    prevTacho[LEFT] = leftMotor.getTachoCount();
+    prevTacho[RIGHT] = rightMotor.getTachoCount();
     
     while (true) {
       // Update previous and current tacho counts (add 3 more lines)
       prevTacho[LEFT] = currTacho[LEFT];
+      prevTacho[RIGHT] = currTacho[RIGHT];
+      currTacho[LEFT] = leftMotor.getTachoCount();
+      currTacho[RIGHT] = rightMotor.getTachoCount();
 
       // TODO Implement this method below so it updates the deltaPosition
       updateDeltaPosition(prevTacho, currTacho, theta, deltaPosition);
 
       // Update odometer values by completing and calling the relevant method
-
+      updateOdometerValues();
       // Print odometer information to the console
-
+      printPosition();
       // Wait until the next physics step to run the next iteration of the loop
     }
   }
@@ -132,8 +139,7 @@ public class Odometer implements Runnable {
    */
   public void printPosition() {
     lock.lock();
-    // TODO
-    System.out.println("Print odometer x, y, theta here"); 
+    System.out.println("x: " + x + " y: " + y + " theta: " + theta); 
     lock.unlock();
   }
   
@@ -171,9 +177,10 @@ public class Odometer implements Runnable {
     lock.lock();
     isResetting = true;
     try {
+      //Update y and theta. Remember to keep theta within 360 degrees
       x += deltaPosition[0];
-      
-      // TODO Update y and theta. Remember to keep theta within 360 degrees
+      y += deltaPosition[1];
+      theta += (theta + (360 + deltaPosition[2]) % 360) % 360;
       
       isResetting = false;
       doneResetting.signalAll(); // Let the other threads know we are done resetting
@@ -190,7 +197,17 @@ public class Odometer implements Runnable {
    * @param theta the value of theta in degrees
    */
   public void setXyt(double x, double y, double theta) {
-    // TODO Complete based on setX() method below
+    lock.lock();
+    isResetting = true;
+    try {
+      this.x = x;
+      this.y = y;
+      this.theta = theta;
+      isResetting = false;
+      doneResetting.signalAll();
+    } finally {
+      lock.unlock();
+    }
   }
 
   /**
@@ -216,7 +233,15 @@ public class Odometer implements Runnable {
    * @param y the value of y
    */
   public void setY(double y) {
-    // TODO
+    lock.lock();
+    isResetting = true;
+    try {
+      this.y = y;
+      isResetting = false;
+      doneResetting.signalAll();
+    } finally {
+      lock.unlock();
+    }
   }
 
   /**
@@ -225,7 +250,15 @@ public class Odometer implements Runnable {
    * @param theta the value of theta
    */
   public void setTheta(double theta) {
-    // TODO
+    lock.lock();
+    isResetting = true;
+    try {
+      this.theta = theta;
+      isResetting = false;
+      doneResetting.signalAll();
+    } finally {
+      lock.unlock();
+    }
   }
 
 }
