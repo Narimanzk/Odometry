@@ -125,11 +125,11 @@ public class Odometer implements Runnable {
     
     //Calculate changes in x, y, theta based on current and previous tachometer counts:
     // Compute left and right wheel displacements
-    double leftdisp = 3.14159 * WHEEL_RAD * (curr[LEFT]-prev[LEFT])/180;
-    double rightdisp = 3.14159 * WHEEL_RAD * (curr[RIGHT]-prev[RIGHT])/180;
+    double leftdisp = 3.14159 * WHEEL_RAD * (curr[LEFT] - prev[LEFT]) / 180;
+    double rightdisp = 3.14159 * WHEEL_RAD * (curr[RIGHT] - prev[RIGHT]) / 180;
     double thetadisp = 0.5 * (leftdisp + rightdisp);
     // Compute change in heading and x and y components of displacement
-    dtheta = ((leftdisp - rightdisp)/BASE_WIDTH) * (180 / Math.PI);
+    dtheta = ((leftdisp - rightdisp) / BASE_WIDTH) * (180 / Math.PI);
     dx = thetadisp * Math.sin(theta);
     dy = thetadisp * Math.cos(theta);
     // Set deltas
