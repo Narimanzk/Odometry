@@ -81,7 +81,9 @@ public class SquareDriver {
    * @param speed the speed in degrees per second
    */
   public static void setSpeed(int speed) {
-    // TODO Implement this by reusing an existing method (1 line)
+    //Implement this by reusing an existing method (1 line)
+    leftMotor.setSpeed(speed);
+    rightMotor.setSpeed(speed);
   }
   
   /**
@@ -91,7 +93,8 @@ public class SquareDriver {
    * @param rightSpeed the speed of the right motor in degrees per second
    */
   public static void setSpeeds(int leftSpeed, int rightSpeed) {
-    // TODO
+    leftMotor.setSpeed(leftSpeed);
+    rightMotor.setSpeed(rightSpeed);
   }
   
   /**
@@ -100,7 +103,8 @@ public class SquareDriver {
    * @param acceleration the acceleration in degrees per second squared
    */
   public static void setAcceleration(int acceleration) {
-    // TODO
+    leftMotor.setAcceleration(acceleration);
+    rightMotor.setAcceleration(acceleration);
   }
 
 }
