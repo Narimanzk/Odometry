@@ -106,6 +106,7 @@ public class Odometer implements Runnable {
       // Print odometer information to the console
       printPosition();
       // Wait until the next physics step to run the next iteration of the loop
+      waitUntilNextStep();
     }
   }
   
@@ -125,13 +126,13 @@ public class Odometer implements Runnable {
     
     //Calculate changes in x, y, theta based on current and previous tachometer counts:
     // Compute left and right wheel displacements
-    double leftdisp = 3.14159 * WHEEL_RAD * (curr[LEFT] - prev[LEFT]) / 180;
-    double rightdisp = 3.14159 * WHEEL_RAD * (curr[RIGHT] - prev[RIGHT]) / 180;
+    double leftdisp = Math.PI * WHEEL_RAD * (curr[LEFT] - prev[LEFT]) / 180;
+    double rightdisp = Math.PI * WHEEL_RAD * (curr[RIGHT] - prev[RIGHT]) / 180; 
     double thetadisp = 0.5 * (leftdisp + rightdisp);
     // Compute change in heading and x and y components of displacement
-    dtheta = ((leftdisp - rightdisp) / BASE_WIDTH) * (180 / Math.PI);
-    dx = thetadisp * Math.sin(theta);
-    dy = thetadisp * Math.cos(theta);
+    dtheta = ((leftdisp - rightdisp) / BASE_WIDTH);
+    dx = thetadisp * Math.sin(dtheta);
+    dy = thetadisp * Math.cos(dtheta);
     // Set deltas
     deltas[0] = dx;
     deltas[1] = dy;
