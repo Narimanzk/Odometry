@@ -52,7 +52,7 @@ public class SquareDriver {
     leftMotor.setSpeed(FORWARD_SPEED);
     rightMotor.setSpeed(FORWARD_SPEED);
     leftMotor.rotate(convertAngle(angle), true);
-    rightMotor.rotate(convertAngle(angle), false);
+    rightMotor.rotate(-(convertAngle(angle)), false);
   }
   
   /**
