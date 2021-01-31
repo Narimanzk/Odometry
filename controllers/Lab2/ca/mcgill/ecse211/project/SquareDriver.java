@@ -28,8 +28,12 @@ public class SquareDriver {
    * @param distance in feet (tile sizes), may be negative
    */
   public static void moveStraightFor(double distance) {
-    // TODO Set motor speeds and rotate them by the given distance.
+    //Set motor speeds and rotate them by the given distance.
     // This method should not return until the robot has finished moving.
+    leftMotor.setSpeed(FORWARD_SPEED);
+    rightMotor.setSpeed(FORWARD_SPEED);
+    leftMotor.rotate(convertDistance(distance), true);
+    rightMotor.rotate(convertDistance(distance), false);
   }
   
   /**
@@ -41,7 +45,12 @@ public class SquareDriver {
    * @param angle the angle by which to turn, in degrees
    */
   public static void turnBy(double angle) {
-    // TODO Hint: similar to moveStraightFor(), but use a minus sign
+    //Hint: similar to moveStraightFor(), but use a minus sign
+    leftMotor.setSpeed(ROTATE_SPEED);
+    rightMotor.setSpeed(ROTATE_SPEED);
+    
+    leftMotor.rotate(convertAngle(angle), true);
+    rightMotor.rotate(-(convertAngle(angle)), false);
   }
   
   /**
@@ -51,8 +60,7 @@ public class SquareDriver {
    * @return the wheel rotations necessary to cover the distance in degrees
    */
   public static int convertDistance(double distance) {
-    // TODO Compute and return the correct value.
-    return 0;
+    return (int) ((180 * distance) / (Math.PI * WHEEL_RAD));
   }
 
   /**
@@ -63,8 +71,7 @@ public class SquareDriver {
    * @return the wheel rotations necessary to rotate the robot by the angle in degrees
    */
   public static int convertAngle(double angle) {
-    // TODO Compute and return the correct value. Hint: you can reuse convertDistance()
-    return 0;
+    return convertDistance(Math.PI * BASE_WIDTH * angle / 360.0);
   }
   
   /**
