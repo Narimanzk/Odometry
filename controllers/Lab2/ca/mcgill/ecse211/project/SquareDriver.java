@@ -34,7 +34,10 @@ public class SquareDriver {
     rightMotor.setSpeed(FORWARD_SPEED);
     leftMotor.rotate(convertDistance(distance), true);
     rightMotor.rotate(convertDistance(distance), false);
+    
   }
+  
+
   
   /**
    * Turns the robot by a specified angle. Note that this method is different from
@@ -46,11 +49,10 @@ public class SquareDriver {
    */
   public static void turnBy(double angle) {
     //Hint: similar to moveStraightFor(), but use a minus sign
-    leftMotor.setSpeed(ROTATE_SPEED);
-    rightMotor.setSpeed(ROTATE_SPEED);
-    
+    leftMotor.setSpeed(FORWARD_SPEED);
+    rightMotor.setSpeed(FORWARD_SPEED);
     leftMotor.rotate(convertAngle(angle), true);
-    rightMotor.rotate(-(convertAngle(angle)), false);
+    rightMotor.rotate(convertAngle(angle), false);
   }
   
   /**
@@ -60,7 +62,7 @@ public class SquareDriver {
    * @return the wheel rotations necessary to cover the distance in degrees
    */
   public static int convertDistance(double distance) {
-    return (int) ((180 * distance) / (Math.PI * WHEEL_RAD));
+    return ((int)((distance*(57.3 / WHEEL_RAD * 100))/100));
   }
 
   /**
@@ -71,7 +73,8 @@ public class SquareDriver {
    * @return the wheel rotations necessary to rotate the robot by the angle in degrees
    */
   public static int convertAngle(double angle) {
-    return convertDistance(Math.PI * BASE_WIDTH * angle / 360.0);
+    
+    return ((int)((angle *(BASE_WIDTH / WHEEL_RAD*50)* 100))/ 100);
   }
   
   /**
