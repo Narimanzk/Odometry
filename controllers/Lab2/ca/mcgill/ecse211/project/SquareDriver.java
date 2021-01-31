@@ -62,7 +62,7 @@ public class SquareDriver {
    * @return the wheel rotations necessary to cover the distance in degrees
    */
   public static int convertDistance(double distance) {
-    return ((int)((distance*(57.3 / WHEEL_RAD * 100))/100));
+    return ((int) ((distance * (57.3 / WHEEL_RAD * 100)) / 100));
   }
 
   /**
@@ -74,7 +74,7 @@ public class SquareDriver {
    */
   public static int convertAngle(double angle) {
     
-    return ((int)((angle *(BASE_WIDTH / WHEEL_RAD*50)* 100))/ 100);
+    return ((int) ((angle * (BASE_WIDTH / WHEEL_RAD * 50) * 100)) / 100);
   }
   
   /**
