@@ -90,13 +90,14 @@ public class Odometer implements Runnable {
     rightMotor.resetTachoCount();
     prevTacho[LEFT] = leftMotor.getTachoCount();
     prevTacho[RIGHT] = rightMotor.getTachoCount();
+
     
     while (true) {
       // Update previous and current tacho counts (add 3 more lines)
       prevTacho[LEFT] = currTacho[LEFT];
       prevTacho[RIGHT] = currTacho[RIGHT];
-      currTacho[LEFT] = leftMotor.getTachoCount() - prevTacho[LEFT];
-      currTacho[RIGHT] = rightMotor.getTachoCount() - prevTacho[RIGHT];
+      currTacho[LEFT] = leftMotor.getTachoCount();
+      currTacho[RIGHT] = rightMotor.getTachoCount();
 
       //updating the deltaPosition
       updateDeltaPosition(prevTacho, currTacho, theta, deltaPosition);
@@ -128,8 +129,9 @@ public class Odometer implements Runnable {
     
     //Calculate changes in x, y, theta based on current and previous tachometer counts:
     // Compute left and right wheel displacements
-    double leftdisp = Math.PI * WHEEL_RAD * (curr[LEFT] - prev[LEFT]) / 180;
-    double rightdisp = Math.PI * WHEEL_RAD * (curr[RIGHT] - prev[RIGHT]) / 180; 
+    double leftdisp = (Math.PI * WHEEL_RAD * (curr[LEFT] - prev[LEFT])) / 180;
+    double rightdisp = (Math.PI * WHEEL_RAD * (curr[RIGHT] - prev[RIGHT])) / 180;
+    
     double thetadisp = 0.5 * (leftdisp + rightdisp);
     // Compute change in heading and x and y components of displacement
     dtheta = ((leftdisp - rightdisp) / BASE_WIDTH);
@@ -188,8 +190,7 @@ public class Odometer implements Runnable {
       //Update y and theta. Remember to keep theta within 360 degrees
       x += deltaPosition[0];
       y += deltaPosition[1];
-      theta += (theta + (360 + deltaPosition[2]) % 360) % 360;
-      //theta = (theta + deltaPosition[2]) % 360;
+      theta = (theta + deltaPosition[2]) % 360;
    
       isResetting = false;
       doneResetting.signalAll(); // Let the other threads know we are done resetting
