@@ -103,9 +103,7 @@ public class Odometer implements Runnable {
       updateDeltaPosition(prevTacho, currTacho, theta, deltaPosition);
 
       // Update odometer values by completing and calling the relevant method
-      //System.out.println(deltaPosition[0] + " " + deltaPosition[1]);
       updateOdometerValues();
-      //System.out.println(prevTacho[0] + " " + prevTacho[1]);
       // Print odometer information to the console
       printPosition();
       // Wait until the next physics step to run the next iteration of the loop
@@ -138,7 +136,6 @@ public class Odometer implements Runnable {
     theta += dtheta;
     dx = dmag * Math.sin(theta);
     dy = dmag * Math.cos(theta);
-    //System.out.println(dx + " " + dy);
     // Set deltas
     deltas[0] = dx;
     deltas[1] = dy;
