@@ -62,6 +62,7 @@ public class SquareDriver {
    * @return the wheel rotations necessary to cover the distance in degrees
    */
   public static int convertDistance(double distance) {
+    //Using arc length to calculate the distance
     return (int) ((180 * distance) / (Math.PI * WHEEL_RAD));
   }
 

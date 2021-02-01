@@ -132,11 +132,12 @@ public class Odometer implements Runnable {
     double leftdisp = (Math.PI * WHEEL_RAD * (curr[LEFT] - prev[LEFT])) / 180;
     double rightdisp = (Math.PI * WHEEL_RAD * (curr[RIGHT] - prev[RIGHT])) / 180;
     
-    double thetadisp = 0.5 * (leftdisp + rightdisp);
+    double dmag = 0.5 * (leftdisp + rightdisp);
     // Compute change in heading and x and y components of displacement
     dtheta = ((leftdisp - rightdisp) / BASE_WIDTH);
-    dx = thetadisp * Math.sin(dtheta);
-    dy = thetadisp * Math.cos(dtheta);
+    theta += dtheta;
+    dx = dmag * Math.sin(theta);
+    dy = dmag * Math.cos(theta);
     //System.out.println(dx + " " + dy);
     // Set deltas
     deltas[0] = dx;
