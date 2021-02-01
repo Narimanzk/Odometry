@@ -2,6 +2,7 @@ package ca.mcgill.ecse211.project;
 
 import static ca.mcgill.ecse211.project.Resources.NUMBER_OF_THREADS;
 import static ca.mcgill.ecse211.project.Resources.SQUARE_LENGTH;
+import static ca.mcgill.ecse211.project.Resources.TILE_SIZE;
 import static ca.mcgill.ecse211.project.Resources.odometer;
 
 import simlejos.ExecutionController;
@@ -21,9 +22,10 @@ public class Main {
     ExecutionController.performPhysicsStepsInBackground();
     
     //Start the odometer thread (1 line)
+    //odometer.run();
     new Thread(odometer).start();
-    
-    SquareDriver.driveInASquare(SQUARE_LENGTH);
+
+    SquareDriver.driveInASquare(SQUARE_LENGTH * TILE_SIZE);
     System.exit(0);
   }
 
