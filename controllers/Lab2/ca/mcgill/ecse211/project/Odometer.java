@@ -188,8 +188,8 @@ public class Odometer implements Runnable {
       //Update y and theta. Remember to keep theta within 360 degrees
       x += deltaPosition[0];
       y += deltaPosition[1];
-      //theta += (theta + (360 + deltaPosition[2]) % 360) % 360;
-      theta = (theta + deltaPosition[2]) % 360;
+      theta += (theta + (360 + deltaPosition[2]) % 360) % 360;
+      //theta = (theta + deltaPosition[2]) % 360;
    
       isResetting = false;
       doneResetting.signalAll(); // Let the other threads know we are done resetting
