@@ -63,7 +63,7 @@ public class SquareDriver {
    */
   public static int convertDistance(double distance) {
     //Using arc length to calculate the distance
-    return (int) ((180 * distance) / (Math.PI * WHEEL_RAD));
+    return (int) ((180 * distance) / (Math.PI * WHEEL_RAD) * 100) / 100;
   }
 
   /**
@@ -75,7 +75,7 @@ public class SquareDriver {
    */
   public static int convertAngle(double angle) {
     
-    return convertDistance(Math.PI * BASE_WIDTH * angle / 360.0);
+    return convertDistance((Math.PI * BASE_WIDTH * angle / 360.0) * 100) / 100;
   }
   
   /**
