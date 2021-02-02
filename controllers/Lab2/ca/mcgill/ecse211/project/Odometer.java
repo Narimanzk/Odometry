@@ -101,7 +101,6 @@ public class Odometer implements Runnable {
 
       //updating the deltaPosition
       updateDeltaPosition(prevTacho, currTacho, theta, deltaPosition);
-
       // Update odometer values by completing and calling the relevant method
       updateOdometerValues();
       // Print odometer information to the console
@@ -129,7 +128,7 @@ public class Odometer implements Runnable {
     // Compute left and right wheel displacements
     double leftdisp = (Math.PI * WHEEL_RAD * (curr[LEFT] - prev[LEFT])) / 180;
     double rightdisp = (Math.PI * WHEEL_RAD * (curr[RIGHT] - prev[RIGHT])) / 180;
-    
+    // Magnitude of displacement 
     double dmag = 0.5 * (leftdisp + rightdisp);
     // Compute change in heading and x and y components of displacement
     dtheta = ((leftdisp - rightdisp) / BASE_WIDTH);

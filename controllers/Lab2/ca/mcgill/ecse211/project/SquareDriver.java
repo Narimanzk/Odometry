@@ -29,7 +29,7 @@ public class SquareDriver {
    */
   public static void moveStraightFor(double distance) {
     //Set motor speeds and rotate them by the given distance.
-    // This method should not return until the robot has finished moving.
+    // This method will not return until the robot has finished moving.
     leftMotor.setSpeed(FORWARD_SPEED);
     rightMotor.setSpeed(FORWARD_SPEED);
     leftMotor.rotate(convertDistance(distance), true);
@@ -48,7 +48,7 @@ public class SquareDriver {
    * @param angle the angle by which to turn, in degrees
    */
   public static void turnBy(double angle) {
-    //Hint: similar to moveStraightFor(), but use a minus sign
+    //Similar to moveStraightFor(), but with a minus sign
     leftMotor.setSpeed(ROTATE_SPEED);
     rightMotor.setSpeed(ROTATE_SPEED);
     leftMotor.rotate(convertAngle(angle), true);
@@ -62,7 +62,7 @@ public class SquareDriver {
    * @return the wheel rotations necessary to cover the distance in degrees
    */
   public static int convertDistance(double distance) {
-    //Using arc length to calculate the distance
+    // Using arc length formula to calculate the distance + scaling
     return (int) ((180 * distance) / (Math.PI * WHEEL_RAD) * 100) / 100;
   }
 
@@ -74,7 +74,7 @@ public class SquareDriver {
    * @return the wheel rotations necessary to rotate the robot by the angle in degrees
    */
   public static int convertAngle(double angle) {
-    
+    // Using convertDistance method to calculate constant rotation of the robot + scaling
     return convertDistance((Math.PI * BASE_WIDTH * angle / 360.0) * 100) / 100;
   }
   
@@ -92,7 +92,6 @@ public class SquareDriver {
    * @param speed the speed in degrees per second
    */
   public static void setSpeed(int speed) {
-    //Implement this by reusing an existing method (1 line)
     leftMotor.setSpeed(speed);
     rightMotor.setSpeed(speed);
   }
